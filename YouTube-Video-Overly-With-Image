@@ -1,0 +1,56 @@
+<style>
+	.play-btn {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: #222d38;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 10px solid rgb(255, 255, 255);
+    border: 10px solid rgba(255, 255, 255, 0.3);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+	}
+</style>
+
+<script>
+    $('.mrks-iframe-wrapper').on('click', '.mrks-iframe-pb', function () {
+        var $this = $(this), img = $this.siblings("img"), videoUrl = img.data("youtube-link");
+        if (videoUrl != '') {
+            console.log("index of " + videoUrl.indexOf('?'));
+            if (videoUrl.indexOf('?') === -1) {
+                videoUrl += '?autoplay=1&mute=1';
+            } else {
+                videoUrl += '&autoplay=1&mute=1';
+            }
+            $this.hide();
+            img.fadeOut();
+            $this.parents(".mrks-iframe-wrapper").html('<iframe class="mrks-iframe" width="560" height="315"\n' +
+                'src="' + videoUrl + '" frameborder="0" allowfullscreen></iframe>');
+        }
+        return false;
+    });
+
+    $('.video-container').on('click', '.play-video', function () {
+        var $this = $(this), videoUrl = $('.video-container .video-frame').attr("src");
+        if (videoUrl != '') {
+            if (videoUrl.indexOf('?') === -1) {
+                videoUrl += '?autoplay=1&mute=1';
+            } else {
+                videoUrl += '&autoplay=1&mute=1';
+            }
+            $this.hide();
+            $('.video-container .banner_image').fadeOut();
+            $('.video-container .play-shadow').fadeOut();
+            $('.video-container .video-frame').attr('src', videoUrl);
+        }
+        return false;
+    });
+</script>
+
+		<div class="video-content-block mrks-iframe-wrapper">
+                    <a href="javascript:void(0)" class="play-btn mrks-iframe-pb"></a>
+                    <img src="http://localhost/eventbookings-website/wp-content/uploads/2018/04/video.png" alt="video" data-youtube-link="https://www.youtube.com/embed/F9hUGMO7N-8?rel=0&amp;showinfo=0">
+                </div>
